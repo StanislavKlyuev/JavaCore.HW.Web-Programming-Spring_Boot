@@ -1,0 +1,31 @@
+package org.skypro.skyshop.model.product;
+
+public class SimpleProduct extends Product {
+
+    private int price;
+
+    public SimpleProduct(String name, int price) {
+        super(name);
+        if (price <= 0) {
+            throw new IllegalArgumentException("Цена продукта \"" + name + "\" не корректна");
+        }
+        this.price = price;
+        ;
+        System.out.println("Создан продукт " + name);
+    }
+
+    @Override
+    public int getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ": " + price;
+    }
+
+    @Override
+    public boolean isSpecial() {
+        return false;
+    }
+}
