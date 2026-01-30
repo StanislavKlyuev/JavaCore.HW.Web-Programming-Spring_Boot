@@ -8,22 +8,22 @@ import java.util.*;
 @Component
 @SessionScope
 public class ProductBasket {
-    private final Map<UUID, Integer> MAP;
+    private final Map<UUID, Integer> productMap;
 
     public ProductBasket() {
-        this.MAP = new HashMap<>();
+        this.productMap = new HashMap<>();
     }
 
     public void addProduct(UUID id) {
-        Integer count = MAP.get(id);
+        Integer count = productMap.get(id);
         if (count == null) {
-            MAP.put(id, 1);
+            productMap.put(id, 1);
         } else {
-            MAP.put(id, ++count);
+            productMap.put(id, ++count);
         }
     }
 
     public Map<UUID, Integer> getProductsFromBasket() {
-        return Collections.unmodifiableMap(this.MAP);
+        return Collections.unmodifiableMap(this.productMap);
     }
 }

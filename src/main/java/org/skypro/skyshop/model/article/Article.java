@@ -8,22 +8,22 @@ import java.util.Objects;
 
 public final class Article implements Searchable {
 
-    private final String ARTICLE;
-    private final String TEXT;
+    private final String article;
+    private final String text;
 
     private final UUID id;
 
-    public Article(String ARTICLE, String TEXT) {
-        if (ARTICLE == null || ARTICLE.isBlank() || TEXT == null || TEXT.isBlank())
+    public Article(String article, String text) {
+        if (article == null || article.isBlank() || text == null || text.isBlank())
             throw new IllegalArgumentException("Описание продукта не действительно");
-        this.ARTICLE = ARTICLE;
-        this.TEXT = TEXT;
+        this.article = article;
+        this.text = text;
         this.id = UUID.randomUUID();
     }
 
     @Override
     public String toString() {
-        return ARTICLE + " - " + TEXT;
+        return article + " - " + text;
     }
 
     @JsonIgnore
@@ -42,12 +42,12 @@ public final class Article implements Searchable {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (!(object instanceof Article article)) return false;
-        return Objects.equals(ARTICLE, article.ARTICLE);
+        return Objects.equals(this.article, article.article);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(ARTICLE);
+        return Objects.hashCode(article);
     }
 
     /*    @Override
