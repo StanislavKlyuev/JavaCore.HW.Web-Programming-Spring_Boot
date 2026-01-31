@@ -1,5 +1,9 @@
 package org.skypro.skyshop.service;
 
+/*
+Сервис для хранения всех возможных товаров и статей
+ */
+
 import org.skypro.skyshop.model.article.Article;
 import org.skypro.skyshop.model.product.DiscountedProduct;
 import org.skypro.skyshop.model.product.FixPriceProduct;
@@ -61,7 +65,6 @@ public class StorageService {
         articleMap.put(watermellonInfo.getId(), watermellonInfo);
         articleMap.put(cornInfo.getId(), cornInfo);
         articleMap.put(tomatoInfo.getId(), tomatoInfo);
-
     }
 
     public Collection<Searchable> getAllSearchable() {
@@ -69,5 +72,9 @@ public class StorageService {
         coll.addAll(productMap.values());
         coll.addAll((articleMap.values()));
         return coll;
+    }
+
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(productMap.get(id));
     }
 }
