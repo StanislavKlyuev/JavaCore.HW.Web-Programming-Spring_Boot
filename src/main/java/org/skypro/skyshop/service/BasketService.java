@@ -4,6 +4,7 @@ package org.skypro.skyshop.service;
 Сервис для управления корзиной пользователя
  */
 
+import org.skypro.skyshop.exception.NoSuchProductException;
 import org.skypro.skyshop.model.basket.BasketItem;
 import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.basket.UserBasket;
@@ -27,13 +28,13 @@ public class BasketService {
         if (storageService.getProductById(id).isPresent()) {
             productBasket.addProduct(id);
         } else {
-            throw new IllegalArgumentException("Товар не найден");
+            throw new NoSuchProductException(id);
         }
     }
 
     public UserBasket getUserBasket() {
         return new UserBasket(productBasket.getProductsFromBasket().entrySet().stream().
-                map(s -> new BasketItem(storageService.getProductById(s.getKey()).orElseThrow(() -> new IllegalArgumentException("Product not found for ID: " + s.getKey())), s.getValue())).
+                map(s -> new BasketItem(storageService.getProductById(s.getKey()).orElseThrow(() -> new NoSuchProductException(s.getKey())), s.getValue())).
                 collect(Collectors.toCollection(ArrayList::new)));
     }
 }
