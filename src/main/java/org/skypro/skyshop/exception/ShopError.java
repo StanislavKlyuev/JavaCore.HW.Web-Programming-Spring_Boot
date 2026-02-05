@@ -1,10 +1,11 @@
 package org.skypro.skyshop.exception;
 
 public class ShopError {
-    private final String code = "404";
+    private final String code;
     private final String message;
 
-    public ShopError(String message) {
+    public ShopError(String code, String message) {
+        this.code = code;
         this.message = message;
     }
 

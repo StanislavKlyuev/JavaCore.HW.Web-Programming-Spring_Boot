@@ -4,9 +4,9 @@ import org.skypro.skyshop.model.product.Product;
 
 public class BasketItem {
     private final Product product;
-    private final int count;
+    private final Integer count;
 
-    public BasketItem(Product product, int count) {
+    public BasketItem(Product product, Integer count) {
         this.product = product;
         this.count = count;
     }
@@ -15,7 +15,7 @@ public class BasketItem {
         return product;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 }

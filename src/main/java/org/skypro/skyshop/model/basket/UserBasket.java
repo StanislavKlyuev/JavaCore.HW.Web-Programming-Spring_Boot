@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class UserBasket {
     private final ArrayList<BasketItem> basketItemList;
-    private final int total;
+    private final Integer total;
 
     public UserBasket(ArrayList<BasketItem> userList) {
         this.basketItemList = userList;
@@ -15,7 +15,7 @@ public class UserBasket {
         return basketItemList;
     }
 
-    public int getTotal() {
+    public Integer getTotal() {
         return total;
     }
 }
