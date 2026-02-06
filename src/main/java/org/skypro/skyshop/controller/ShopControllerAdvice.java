@@ -2,6 +2,7 @@ package org.skypro.skyshop.controller;
 
 import org.skypro.skyshop.exception.NoSuchProductException;
 import org.skypro.skyshop.exception.ShopError;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,21 +12,6 @@ public class ShopControllerAdvice {
 
     @ExceptionHandler(NoSuchProductException.class)
     public ResponseEntity<ShopError> handleNoSuchProductException(NoSuchProductException e) {
-        return ResponseEntity.badRequest().body(new ShopError(e.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ShopError(HttpStatus.NOT_FOUND.toString(), e.getMessage()));
     }
 }
-
-/* Данный фрагмент кода на Java представляет собой глобальный обработчик исключений в приложении Spring.
-    Он использует аннотации @ControllerAdvice для глобальной обработки ошибок. То есть любой Exception, выпадающий в
-    нашем приложении, будет замечен нашим ControllerAdvice.
-
-    Метод handleNoSuchProductException с аннотацией @ExceptionHandler перехватывает исключения типа NoSuchProductException.
-    аннотация@ExceptionHandler над методом позволяет нам указать, что мы хотим перехватывать и обрабатывать исключения определённого типа, если они возникают, и зашивать их в ResponseEntity,
-    чтобы вернуть ответ. В аргументах метода указываем, какую именно ошибку мы собираемся ловить.
-    В данном случае, это наш кастомный NoSuchProductException. И возвращать мы будем точно такой же ResponseEntity,
-    Спринг на этапе обработки этой ошибки самостоятельно поймёт, что в методе нашего контроллера вместо нашего класса Product нужно будет вернуть ResponseEntity.
-
-    При возникновении такого исключения метод возвращает объект ResponseEntity с ошибкой в формате ShopError, содержащей код состояния HTTP 404 и сообщение об ошибке.
-
-    Этот подход позволяет централизовать обработку исключений в приложении, упрощая код контроллеров и улучшая читаемость.
- */
